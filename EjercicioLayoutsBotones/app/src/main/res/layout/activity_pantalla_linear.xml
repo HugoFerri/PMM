@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/gruporb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verde" />
+
+        <RadioButton
+            android:id="@+id/radioRed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rojo" />
+
+        <RadioButton
+            android:id="@+id/radioBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Azul" />
+    </RadioGroup>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/botonSetcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Poner color" />
+
+        <Button
+            android:id="@+id/botonBorrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Borrar" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/LblSeleccion"
+        android:layout_width="fill_parent"
+        android:layout_height="495dp"
+        android:text="" />
+</LinearLayout>

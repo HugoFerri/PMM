@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context="com.example.ionber.prueba1.MainActivity">
+
+        <TextView
+            android:text="@string/saludo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/miTxt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/escribe" />
+
+        <Button
+            android:id="@+id/BotonSaludo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pulsar" />
+        <TextView
+            android:id="@+id/miLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+</LinearLayout>

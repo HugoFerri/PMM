@@ -1,0 +1,22 @@
+<LinearLayout android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.example.hugtra.diferenteseventos.miButton
+        android:id="@+id/cmdUno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Uno"/>
+
+    <Button android:id="@+id/cmdDos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dos"
+        android:onClick="cmdDos_click"/>
+
+    <Button android:id="@+id/cmdTres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tres"/>
+</LinearLayout>
