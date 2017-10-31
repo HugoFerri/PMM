@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button btn=(Button)this.findViewById(R.id.cmdTres);
         btn.setOnClickListener(new OnClickListener(){
-
             @Override
             public void onClick(View v) {
                 Toast.makeText(ctx, "Pulsado boton Tres", Toast.LENGTH_SHORT).show();
