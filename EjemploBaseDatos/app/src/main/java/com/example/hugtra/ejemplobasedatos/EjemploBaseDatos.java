@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -38,16 +39,16 @@ public class EjemploBaseDatos extends Activity {
 
         //En caso de abrir de forma correcta la base de datos
         //Introducimos 3 clientes de ejemplo
-              for (int cont=1; cont<=3; cont++) {
+        //      for (int cont=1; cont<=3; cont++) {
         //Creamos los datos
-                   int codigo = cont;
-                  String nombre = "Cliente" + cont;
-                  String telefono = cont + "XXXXXXX";
+        //           int codigo = cont;
+        //          String nombre = "Cliente" + cont;
+        //          String telefono = cont + "XXXXXXX";
 
         //Introducimos los datos en la tabla Clientes
-                  bd.execSQL("INSERT INTO Clientes (codigo, nombre, telefono) " +
-                           "VALUES (" + codigo + ", '" + nombre + "', '" + telefono + "')");
-              }
+        //          bd.execSQL("INSERT INTO Clientes (codigo, nombre, telefono) " +
+         //                  "VALUES (" + codigo + ", '" + nombre + "', '" + telefono + "')");
+        //      }
         //Ejemplo Select1
         //   		String[] args3 = new String[]{"cli1"};
         //   		Cursor c = bd.rawQuery("SELECT nombre,telefono FROM Clientes WHERE nombre=? ", args3);
@@ -75,6 +76,18 @@ public class EjemploBaseDatos extends Activity {
         AdaptadorClientes adaptador = new AdaptadorClientes(this);
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adaptador);
+
+        /*
+
+        Button button = (Button)findViewById(R.id.btnaddcliente);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent miIntent = new Intent(EjemploBaseDatos.this, AddCliente.class);
+                startActivity(miIntent);
+            }
+        });
+
+        */
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
