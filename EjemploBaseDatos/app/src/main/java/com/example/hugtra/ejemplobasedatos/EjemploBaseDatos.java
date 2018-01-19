@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,8 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,18 +80,6 @@ public class EjemploBaseDatos extends Activity {
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adaptador);
 
-        /*
-
-        Button button = (Button)findViewById(R.id.btnaddcliente);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent miIntent = new Intent(EjemploBaseDatos.this, AddCliente.class);
-                startActivity(miIntent);
-            }
-        });
-
-        */
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -103,6 +94,25 @@ public class EjemploBaseDatos extends Activity {
         });
         //Cerramos la base de datos
         // }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.addcliente:
+                Intent addcliente = new Intent(getApplicationContext(), AddCliente.class);
+                startActivity(addcliente);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public class AdaptadorClientes extends ArrayAdapter {
