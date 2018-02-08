@@ -28,14 +28,13 @@ public class Resultado extends AppCompatActivity {
 
         nom =(TextView)findViewById(R.id.TVbocadillo);
         bocadillo = (Bocadillo)bundle.getSerializable("BOCADILLO");
-        String a = Integer.toString(bocadillo.getPrecio());
+        String a = Float.toString(bocadillo.getPrecio());
         nom.setText(bocadillo.getNombre());
         preciobase.setText(a);
         extras.setText(bundle.getString("EXTRAS"));
         cantidad.setText(bundle.getString("CANTIDAD"));
         Envio.setText(bundle.getString("ENVIO"));
         coste.setText(bundle.getString("TOTAL"));
-        img.setImageResource(bocadillo.getFoto());
 
 
 

@@ -21,7 +21,7 @@ public class BocadilloHelper extends SQLiteOpenHelper{
 
     private static final String DATABASE_CREATE_BOCADILLOS =
             "create table "+ DATABASE_TABLE_BOCADILLOS +" ("+SL_ID_BOCADILLOS+
-                    " integer primary key, "+SL_NAME+" text not null, "+SL_PRECIO+" double,  "
+                    " integer primary key, "+SL_NAME+" text not null, "+SL_PRECIO+" float,  "
                     +SL_INGREDIENTES+" text not null)";
 
     public BocadilloHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
