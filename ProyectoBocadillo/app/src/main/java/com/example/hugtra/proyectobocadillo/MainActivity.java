@@ -2,6 +2,7 @@ package com.example.hugtra.proyectobocadillo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,25 +21,30 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    String [] columnas = {"id" , "ingredientes", "name", "precio"};
+    Bocadillo [] arrBocadillos;
+
     static class ViewHolder {
         TextView nombre;
         TextView precio;
         TextView ingre;
         ImageView img;
     }
-    private Bocadillo[] bocadillo = new Bocadillo[]{
-            new Bocadillo("Catalan",2,"jamon, tomate",R.drawable.bocadillo1),
-            new Bocadillo("Chivito",3,"huevo, queso, pechuga, lechuga",R.drawable.bocadillo2),
-            new Bocadillo("Patata",3,"Tortilla de patata",R.drawable.bocadillo3),
-            new Bocadillo("Bacon Queso",2,"bacon, queso",R.drawable.bocadillo4),
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Bundle paso_datos = new Bundle();
+        BocadilloHelper  bocadilloHelper = new BocadilloHelper(this, "dbBocateria", null, 1);
+        SQLiteDatabase sqLiteDatabase = bocadilloHelper.getWritableDatabase();
 
+
+        if(sqLiteDatabase != null){
+            sqLiteDatabase.execSQL("INSERT INTO bocadillos (nombre, ingredientes, precio, id) VALUES ('Bocadillo jamon','Jamon, tomate','2', '1') ");
+            sqLiteDatabase.execSQL("INSERT INTO bocadillos (nombre, ingredientes, precio, id) VALUES ('Chivito','huevo, queso, patata, lechuga','3', '2') ");
+            sqLiteDatabase.execSQL("INSERT INTO bocadillos (nombre, ingredientes, precio, id) VALUES ('Patata','Tortilla de patata','2', '3') ");
+            sqLiteDatabase.execSQL("INSERT INTO bocadillos (nombre, ingredientes, precio, id) VALUES ('Sobadito','bacon, queso, ternera','3', '4') ");
+        }
         final EditText tvbocadillo = (EditText) findViewById(R.id.editText);
         final Spinner miSpinner = (Spinner) findViewById(R.id.spinner);
 
@@ -89,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         miSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView arg0, View arg1, int position, long id) {
-                paso_datos.putSerializable("BOCADILLO", bocadillo[miSpinner.getSelectedItemPosition()]);
+
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -107,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String cantidad = tvbocadillo.getText().toString();
-                paso_datos.putString("CANTIDAD", cantidad);
+
                 int canti = Integer.parseInt(cantidad);
                 int pos = miSpinner.getSelectedItemPosition();
                 int precio = bocadillo[pos].getPrecio();
@@ -115,18 +121,17 @@ public class MainActivity extends AppCompatActivity {
 
                 int paso1 = añadido(cont);
                 String comple = Integer.toString(paso1);
-                paso_datos.putString("EXTRAS", comple);
+
                 int paso2 = cantidad(canti, precio);
                 double total = envio(paso2 + paso1);
 
                 String resultado = Double.toString(total);
                 String tipoeenvio = envios();
-                paso_datos.putString("TOTAL", resultado);
-                paso_datos.putString("ENVIO", tipoeenvio);
+
 
 
                 Intent miIntent = new Intent(MainActivity.this, Resultado.class);
-                miIntent.putExtras(paso_datos);
+
                 startActivity(miIntent);
 
             }
