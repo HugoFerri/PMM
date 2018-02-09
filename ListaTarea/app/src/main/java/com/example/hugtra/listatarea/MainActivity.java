@@ -2,6 +2,8 @@ package com.example.hugtra.listatarea;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,6 +34,9 @@ public class MainActivity extends ListActivity{
     public static final int NEW_ITEM = 1;
     public static final int EDIT_ITEM = 2;
     public static final int SHOW_ITEM = 3;
+    public static final int SHOW_PREF = 4;
+
+    private Button btnPreferencias;
 
     //elemento seleccionado
     private int mLastRowSelected = 0;
@@ -41,6 +47,9 @@ public class MainActivity extends ListActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btnPreferencias = (Button)findViewById(R.id.btnPreferencias);
+
         // abrir la base de datos
         mDbHelper = new DataBaseHelper(this);
         try {
@@ -153,18 +162,35 @@ public class MainActivity extends ListActivity{
                 Intent intent = new Intent (this,ItemActivity.class);
                 startActivityForResult(intent, NEW_ITEM);
                 return true;
+            case R.id.btnPreferencias:
+                Intent intent2 = new Intent (this,PantallaOpciones.class);
+                startActivity(intent2);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
+//DESDE AQUI LLAMAMOS A LA ACTIVIDAD
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Intent i = new Intent(this, ItemActivity.class);
         int rowId = (Integer)v.findViewById(R.id.row_importance).getTag();
         i.putExtra(DataBaseHelper.SL_ID, rowId);
         i.putExtra("action", SHOW_ITEM);
-        startActivityForResult(i, SHOW_ITEM);
+        addFragment();
+        //startActivityForResult(i, SHOW_ITEM);
+    }
+
+    void addFragment() {
+        // Instanciamos nuevo Fragment
+        Fragment newFragment = Fragmento.newInstance(1);
+        // Se añade el Fragment a la actividad
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.fragmentShow, newFragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        // añadimos la transacion a la pila
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
 

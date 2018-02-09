@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Categoria 1">
+        <CheckBoxPreference
+            android:key="opcion 1"
+            android:title="Activar borrado"
+            android:summary="Descripcion preferencia 1" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Categoria 2">
+        <ListPreference
+            android:key="opcion 2"
+            android:title="Tipo tarea"
+            android:summary="Descripcion preferencia 2"
+            android:dialogTitle="Indicar tipo de tarea"
+            android:entries="@array/tipotarea"
+            android:entryValues="@array/codigotarea"/>
+    </PreferenceCategory>
+</PreferenceScreen>
