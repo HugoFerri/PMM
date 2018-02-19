@@ -28,18 +28,31 @@ public class Imagen extends AppCompatActivity {
         protected void onDraw(Canvas canvas) {
 
             Paint pincel = new Paint();
-            pincel.setColor(Color.YELLOW);
-            pincel.setStrokeWidth(30);
-            pincel.setStyle(Paint.Style.STROKE);
-            canvas.drawCircle(530, 500, 150, pincel);
-            pincel.setStyle(Paint.Style.FILL_AND_STROKE);
-            pincel.setColor(Color.RED);
-            canvas.drawCircle(530, 500, 130, pincel);
-            pincel.setStrokeWidth(3);
-            pincel.setTextSize(50);
-            pincel.setTypeface(Typeface.DEFAULT_BOLD);
             pincel.setColor(Color.BLACK);
-            canvas.drawText("Trabajo hecho por Hugo Ferri",200,1400,pincel);
+            pincel.setStrokeWidth(15);
+            pincel.setStyle(Paint.Style.STROKE);
+            canvas.drawLine(500,50,350,350,pincel);
+            canvas.drawLine(500,50,700,350,pincel);
+            canvas.drawLine(350,350,700,350,pincel);
+            pincel.setColor(Color.BLACK);
+            canvas.drawCircle(520, 500, 150, pincel);
+            pincel.setColor(Color.BLUE);
+            canvas.drawCircle(450,480,20,pincel);
+            canvas.drawCircle(580,480,20,pincel);
+            canvas.drawLine(450,600,580,600,pincel);
+            pincel.setColor(Color.BLACK);
+            canvas.drawLine(430,660,380,1050,pincel);
+            canvas.drawLine(600,660,650,1050,pincel);
+            canvas.drawLine(430,660,600,660,pincel);
+            canvas.drawLine(380,1050,650,1050,pincel);
+            canvas.drawLine(430,700,250,900,pincel);
+            canvas.drawLine(610,700,790,900,pincel);
+            canvas.drawLine(550,1050,550,1300,pincel);
+            canvas.drawLine(500,1050,500,1300,pincel);
+            pincel.setStrokeWidth(5);
+            pincel.setTextSize(40);
+            pincel.setColor(Color.BLACK);
+            canvas.drawText("Drawed by Hugo Ferri Tramoyeres",200,1400,pincel);
         }
     }
 }

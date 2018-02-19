@@ -1,18 +1,14 @@
 package com.example.hugtra.proyectobocadillo;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -26,8 +22,7 @@ public class MainActivity extends AppCompatActivity {
     String [] columnas = {"id" , "ingredientes", "name", "precio"};
     Bocadillo [] arrBocadillos;
     SQLiteDatabase sqLiteDatabase;
-    PedidoHelper pedidoHelper;
-    
+
     static class ViewHolder {
         TextView nombre;
         TextView precio;
@@ -41,19 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText tvbocadillo = (EditText) findViewById(R.id.editText);
         final Spinner miSpinner = (Spinner) findViewById(R.id.spinner);
-        BocadilloHelper bocadilloHelper = new BocadilloHelper(this, "dbBocateria", null, 1);
-
-        //Abrimos la base de datos para que sea editable
+        DataBaseHelper bocadilloHelper = new DataBaseHelper(this, "dbBocateria", null, 1);
         sqLiteDatabase = bocadilloHelper.getWritableDatabase();
 
-        if(sqLiteDatabase == null){
-            sqLiteDatabase.execSQL("INSERT INTO bocadillos (id , ingredientes, name, precio) VALUES ('1', 'Jamon, tomate', 'Bocadillo jamon', '2') ");
-            sqLiteDatabase.execSQL("INSERT INTO bocadillos (id , ingredientes, name, precio) VALUES ('2', 'huevo, queso, patata, lechuga', 'Chivito','3') ");
-            sqLiteDatabase.execSQL("INSERT INTO bocadillos (id , ingredientes, name, precio) VALUES ('3', 'Tortilla de patata', 'Patatica','2') ");
-            sqLiteDatabase.execSQL("INSERT INTO bocadillos (id , ingredientes, name, precio) VALUES ('4', 'bacon, queso, ternera', 'Sobadito','3') ");
-        }
-        //Creamos un cursor
-        Cursor cursor = sqLiteDatabase.query("Bocadillos", columnas,null,null,null,null,null);
+
+
+        Cursor cursor = sqLiteDatabase.query("bocadillos", columnas,null,null,null,null,null);
 
         //Inicializamos el array con el tamaño que tenga el cursor al hacer el conteo
         arrBocadillos = new Bocadillo[cursor.getCount()];
@@ -67,9 +55,10 @@ public class MainActivity extends AppCompatActivity {
                 String name = cursor.getString(2);
                 float precio = cursor.getFloat(3);
 
-                arrBocadillos[i] = new Bocadillo(name,precio,ingredientes, id);
 
+                arrBocadillos[i] = new Bocadillo(name,precio,ingredientes, id);
                 i++;
+
             }while(cursor.moveToNext());
         }
 
@@ -80,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         miSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView arg0, View arg1, int position, long id) {
-                        String test = "ID: "+arrBocadillos[position].getId();
+                String test = "ID: "+arrBocadillos[position].getId();
 
                 Toast.makeText(getApplicationContext(),test,Toast.LENGTH_SHORT).show();            }
 
@@ -105,22 +94,22 @@ public class MainActivity extends AppCompatActivity {
                 int precio = (int) arrBocadillos[pos].getPrecio();
                 int cont =0;
 
-                int paso1 = añadido(cont);
-                String comple = Integer.toString(paso1);
+                int complementos = anyadido(cont);
+                String comple = Integer.toString(complementos);
 
                 int paso2 = cantidad(canti, precio);
-                double total = envio(paso2 + paso1);
+                double total = envio(paso2 + complementos);
 
                 String resultado = Double.toString(total);
+                String bocadillo  = arrBocadillos[pos].getNombre();
                 String tipoeenvio = envios();
+                String tipoextras = tipoextras();
 
-                pedidoHelper = new PedidoHelper(this, "dbBocateria", null, 1)
 
-                sqLiteDatabase = pedidoHelper.getWritableDatabase();
+                int nepe = arrBocadillos[pos].getId();
 
-                sqLiteDatabase.execSQL(PedidoHelper.DATABASE_CREATE_PEDIDO);
-                sqLiteDatabase.execSQL("INSERT INTO pedidos (barra,bocadillo,cantidad,precio,envio) VALUES ( '" +tipoExtra+"',' "+ sandwich +  "','" +catida +
-                        "',' " +resultado+"','"+ tipoeenvio+"') ");
+                sqLiteDatabase.execSQL("INSERT INTO pedidos (id_food,bocadillo,cantidad,precio,envio,extras) VALUES ( '" +nepe+"',' "+ bocadillo +  "','" +cantidad +
+                        "',' " +resultado+"','"+ tipoeenvio+"','"+tipoextras+"') ");
 
                 Intent miIntent = new Intent(MainActivity.this, Resultado.class);
 
@@ -128,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-            public int añadido(int cont) {
+            public int anyadido(int cont) {
                 if (ch1.isChecked())
                     cont++;
                 if (ch2.isChecked())
@@ -160,6 +149,17 @@ public class MainActivity extends AppCompatActivity {
                 } else if (r2.isChecked()) {
                     x = "Envio domicilio";
                 }
+                return x;
+
+            }
+            public String tipoextras() {
+                String x = "";
+                if (ch1.isChecked())
+                    x = x + " Barra Entera ";
+                if (ch2.isChecked())
+                    x = x + " Pan Integral ";
+                if (ch3.isChecked())
+                    x = x+"Pan tostado";
                 return x;
 
             }
