@@ -9,6 +9,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private SQLiteDatabase mDb = null;
     private static final String DATABASE_NAME = "dbBocateria";
     private static final int DATABASE_VERSION = 3;
+
     // tabla y campos
     public static final String DATABASE_TABLE_BOCADILLOS = "Bocadillos";
 
@@ -22,7 +23,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             "create table " + DATABASE_TABLE_BOCADILLOS + " (" + SL_ID_BOCADILLOS +
                     " integer primary key, " + SL_NAME + " text not null, " + SL_PRECIO + " float,  "
                     + SL_INGREDIENTES + " text not null)";
-    public static final String DATABASE_CREATE_PEDIDO = "CREATE TABLE pedidos (id_food, bocadillo TEXT," +
+    public static final String DATABASE_CREATE_PEDIDO = "CREATE TABLE pedidos (id INTEGER primary key autoincrement, id_food INTEGER, bocadillo TEXT," +
             "cantidad INTEGER not null,precio INTEGER not null,envio TEXT,extras TEXT)";
 
     public DataBaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {

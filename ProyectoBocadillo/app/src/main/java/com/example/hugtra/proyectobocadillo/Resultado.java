@@ -23,7 +23,7 @@ import java.util.List;
 public class Resultado extends ListActivity {
     private Bocadillo bocadillo;
     TextView nom;
-    String[] columnaspedidos = new String[]{"bocadillo", "cantidad", "precio", "envio", "extras"};
+    String[] columnaspedidos = new String[]{"bocadillo", "cantidad", "precio", "envio", "extras", "id_food"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public class Resultado extends ListActivity {
         fillData();
     }
 
+    //Recogemos de la BD y rellenamos en la APP
     private void fillData() {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this, "dbBocateria", null, 1);
         SQLiteDatabase sqLiteDatabase = dataBaseHelper.getWritableDatabase();
@@ -104,7 +105,7 @@ public class Resultado extends ListActivity {
         precio.setText(Float.toString(listEntry.precio));
         cantidad.setText(Integer.toString(listEntry.cantidad));
 
-        // dependiendo de la importancia, se muestran distintos iconos
+        // dependiendo del bocadillo, se muestran distintas imagenes
         ImageView icon = (ImageView) row.findViewById(R.id.row_importance);
         icon.setTag(listEntry.id);
         switch (listEntry.id) {

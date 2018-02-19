@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         TextView ingre;
         ImageView img;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,11 +105,9 @@ public class MainActivity extends AppCompatActivity {
                 String bocadillo  = arrBocadillos[pos].getNombre();
                 String tipoeenvio = envios();
                 String tipoextras = tipoextras();
+                int imgbocadillo = arrBocadillos[pos].getId();
 
-
-                int nepe = arrBocadillos[pos].getId();
-
-                sqLiteDatabase.execSQL("INSERT INTO pedidos (id_food,bocadillo,cantidad,precio,envio,extras) VALUES ( '" +nepe+"',' "+ bocadillo +  "','" +cantidad +
+                sqLiteDatabase.execSQL("INSERT INTO pedidos (id_food,bocadillo,cantidad,precio,envio,extras) VALUES ( '" +imgbocadillo+"',' "+ bocadillo +  "','" +cantidad +
                         "',' " +resultado+"','"+ tipoeenvio+"','"+tipoextras+"') ");
 
                 Intent miIntent = new Intent(MainActivity.this, Resultado.class);
@@ -177,12 +176,8 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.AcercaDe:
-                Intent one = new Intent(MainActivity.this, AcercaDe.class);
+                Intent one = new Intent(MainActivity.this,ActividadFragmento.class);
                 startActivity(one);
-                return true;
-            case R.id.Dibujo:
-                Intent two = new Intent(MainActivity.this, Imagen.class);
-                startActivity(two);
                 return true;
         }
         return super.onOptionsItemSelected(item);

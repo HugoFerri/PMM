@@ -17,8 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Resultado" />
-        <activity android:name=".AcercaDe" />
-        <activity android:name=".Imagen" />
+        <activity android:name=".ActividadFragmento" />
     </application>
 
 </manifest>
