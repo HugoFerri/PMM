@@ -4,10 +4,10 @@ import android.database.Cursor;
 
 import com.example.hugo.proyectorecuperacionpmm.models.User;
 
-public class UserDao implements DBContract.UserEntry {
+public class UserDAO implements DBContract.UserEntry {
     private SQLiteHelper sqLiteHelper;
 
-    public UserDao(SQLiteHelper sqLiteHelper) {
+    public UserDAO(SQLiteHelper sqLiteHelper) {
         this.sqLiteHelper = sqLiteHelper;
     }
 

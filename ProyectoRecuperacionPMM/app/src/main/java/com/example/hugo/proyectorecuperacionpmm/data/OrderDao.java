@@ -4,10 +4,10 @@ import android.database.Cursor;
 
 import com.example.hugo.proyectorecuperacionpmm.models.Order;
 
-public class OrderDao implements DBContract.OrderEntry {
+public class OrderDAO implements DBContract.OrderEntry {
     private SQLiteHelper sqLiteHelper;
 
-    public OrderDao(SQLiteHelper sqLiteHelper) {
+    public OrderDAO(SQLiteHelper sqLiteHelper) {
         this.sqLiteHelper = sqLiteHelper;
     }
 

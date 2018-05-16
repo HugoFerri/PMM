@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.hugo.proyectorecuperacionpmm.R;
 import com.example.hugo.proyectorecuperacionpmm.data.SQLiteHelper;
 import com.example.hugo.proyectorecuperacionpmm.models.User;
-import com.example.hugo.proyectorecuperacionpmm.data.UserDao;
+import com.example.hugo.proyectorecuperacionpmm.data.UserDAO;
 
 public class SignUpActivity extends AppCompatActivity {
     EditText emailText;
@@ -73,8 +73,8 @@ public class SignUpActivity extends AppCompatActivity {
                 String password = passwordText.getText().toString();
 
                 SQLiteHelper sqLiteHelper = SQLiteHelper.getInstance(getApplicationContext());
-                UserDao userDao = new UserDao(sqLiteHelper);
-                Cursor cursor = userDao.getUserByEmail(email);
+                UserDAO userDAO = new UserDAO(sqLiteHelper);
+                Cursor cursor = userDAO.getUserByEmail(email);
 
                 if (cursor.moveToFirst()) {
                     emailText.post(new Runnable() {
@@ -86,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    userDao.insertUser(new User(email, password));
+                    userDAO.insertUser(new User(email, password));
                     onSignUpSuccess();
                 }
                 cursor.close();

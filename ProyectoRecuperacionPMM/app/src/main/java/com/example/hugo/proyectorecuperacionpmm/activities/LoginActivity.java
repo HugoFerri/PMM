@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.example.hugo.proyectorecuperacionpmm.data.DBContract;
 import com.example.hugo.proyectorecuperacionpmm.R;
 import com.example.hugo.proyectorecuperacionpmm.data.SQLiteHelper;
-import com.example.hugo.proyectorecuperacionpmm.data.UserDao;
+import com.example.hugo.proyectorecuperacionpmm.data.UserDAO;
 
 public class LoginActivity extends AppCompatActivity {
     private static final int REQUEST_SIGNUP = 0;
@@ -90,8 +90,8 @@ public class LoginActivity extends AppCompatActivity {
                 String password = passwordText.getText().toString();
 
                 SQLiteHelper sqLiteHelper = SQLiteHelper.getInstance(getApplicationContext());
-                UserDao userDao = new UserDao(sqLiteHelper);
-                Cursor cursor = userDao.getUserByEmail(email);
+                UserDAO userDAO = new UserDAO(sqLiteHelper);
+                Cursor cursor = userDAO.getUserByEmail(email);
 
                 if (!cursor.moveToFirst()) {
                     emailText.post(new Runnable() {

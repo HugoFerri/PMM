@@ -4,10 +4,10 @@ import android.database.Cursor;
 
 import com.example.hugo.proyectorecuperacionpmm.models.Sandwich;
 
-public class SandwichDao implements DBContract.SandwichEntry {
+public class SandwichDAO implements DBContract.SandwichEntry {
     private SQLiteHelper sqLiteHelper;
 
-    public SandwichDao(SQLiteHelper sqLiteHelper) {
+    public SandwichDAO(SQLiteHelper sqLiteHelper) {
         this.sqLiteHelper = sqLiteHelper;
     }
 
