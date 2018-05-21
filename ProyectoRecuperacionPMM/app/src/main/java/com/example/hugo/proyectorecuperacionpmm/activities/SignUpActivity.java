@@ -2,6 +2,7 @@ package com.example.hugo.proyectorecuperacionpmm.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Volvemos a la actividad de login
                 finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }
@@ -87,7 +89,7 @@ public class SignUpActivity extends AppCompatActivity {
                     });
                 } else {
                     userDAO.insertUser(new User(email, password));
-                    onSignUpSuccess();
+                    onSignUpSuccess(email);
                 }
                 cursor.close();
                 sqLiteHelper.close();
@@ -96,9 +98,11 @@ public class SignUpActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    private void onSignUpSuccess() {
+    private void onSignUpSuccess(String email) {
         signUpButton.setEnabled(true);
-        setResult(RESULT_OK, null);
+        Intent data = new Intent();
+        data.putExtra("email", email);
+        setResult(RESULT_OK, data);
         finish();
     }
 

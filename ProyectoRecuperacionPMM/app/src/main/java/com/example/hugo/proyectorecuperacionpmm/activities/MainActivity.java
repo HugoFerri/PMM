@@ -7,6 +7,8 @@ import android.os.Bundle;
 import com.example.hugo.proyectorecuperacionpmm.R;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_USER = 0;
+    private String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,7 +16,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_USER);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_USER) {
+            if (resultCode == RESULT_OK) {
+                userEmail = data.getStringExtra("email");
+            }
+        }
     }
 }

@@ -15,8 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hugo.proyectorecuperacionpmm.data.DBContract;
 import com.example.hugo.proyectorecuperacionpmm.R;
+import com.example.hugo.proyectorecuperacionpmm.data.DBContract;
 import com.example.hugo.proyectorecuperacionpmm.data.SQLiteHelper;
 import com.example.hugo.proyectorecuperacionpmm.data.UserDAO;
 
@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-                this.finish();
+                onLoginSuccess(data.getStringExtra("email"));
             }
         }
     }
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    onLoginSuccess();
+                    onLoginSuccess(email);
                 }
                 cursor.close();
                 sqLiteHelper.close();
@@ -124,9 +124,12 @@ public class LoginActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    private void onLoginSuccess() {
+    private void onLoginSuccess(String email) {
         loginButton.setEnabled(true);
         // Volvemos a la actividad principal
+        Intent data = new Intent();
+        data.putExtra("email", email);
+        setResult(RESULT_OK, data);
         finish();
     }
 
