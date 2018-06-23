@@ -1,19 +1,50 @@
 <resources>
     <string name="app_name">ProyectoRecuperacionPMM</string>
 
+    <!-- Strings de LoginActivity y de SignUpActivity -->
     <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="password">Contraseña</string>
     <string name="login_button">Login</string>
-    <string name="signup_button">Create account</string>
-    <string name="signup_link">No account yet? Create one</string>
-    <string name="login_link">Already a member? Login</string>
-    <string name="authentication_message">Authenticating…</string>
-    <string name="creating_account_message">Creating account…</string>
-    <string name="error_login">Login failed</string>
-    <string name="error_signup">Sign up failed</string>
-    <string name="error_email">Enter a valid email address</string>
-    <string name="error_email_not_found">Email not found</string>
-    <string name="error_email_already_used">This email already exists</string>
-    <string name="error_password">Between 4 and 10 alphanumeric characters</string>
-    <string name="error_password_not_correct">Password not correct</string>
+    <string name="signup_button">Crear cuenta</string>
+    <string name="signup_link">¿No tienes cuenta? Crear una</string>
+    <string name="login_link">¿Ya estas registrado? Login</string>
+    <string name="authentication_message">Autenticando…</string>
+    <string name="creating_account_message">Creando cuenta…</string>
+
+    <!-- Strings de error del login y del sign up -->
+    <string name="error_login">Login fallido</string>
+    <string name="error_signup">Inscripcion fallido</string>
+    <string name="error_email">Ingresa un Email valido</string>
+    <string name="error_email_not_found">Email no encontrado</string>
+    <string name="error_email_already_used">El Email ya existe</string>
+    <string name="error_password">Entre 4 y 10 caracteres</string>
+    <string name="error_password_not_correct">Contraseña incorrecta</string>
+
+    <!-- Strings de AboutActivity -->
+    <string name="about">Sobre Hugo Ferri Tramoyeres</string>
+    <string name="app_version">1.0.0</string>
+
+    <!-- Strings de DetailsActivity, de item_sandwich.xml  y Checkout.xml-->
+    <string name="sandwich_name">Nombre</string>
+    <string name="sandwich_price">Precio</string>
+    <string name="sandwich_ingredients">Ingredientes</string>
+    <string name="sandwich_buy">Comprar</string>
+    <string name="address">Direccion</string>
+
+    <!-- Strings de ProfileFragment -->
+    <string name="user_name">Email</string>
+    <string name="user_orders">Mis compras</string>
+    <string name="order_name">Compra</string>
+    <string name="order_address">Direccion</string>
+    <string name="order_date">Fecha</string>
+    <string name="order_price">Precio</string>
+
+    <!-- Strings de la bottom navigation bar -->
+    <string name="menu">Menu</string>
+    <string name="my_profile">Mi perfil</string>
+    <string name="my_order">Mis compras</string>
+
+    <!-- Strings de menu_main -->
+    <string name="menu_about">Sobre…</string>
+
 </resources>

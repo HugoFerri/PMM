@@ -1,11 +1,13 @@
-package com.example.hugo.proyectorecuperacionpmm.models;
+package com.example.hugo.proyectorecuperacionpmm.model;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.example.hugo.proyectorecuperacionpmm.data.DBContract;
 
-public class User implements DBContract {
+public class User implements DBContract, Parcelable {
     private String email;
     private String password;
 
@@ -17,6 +19,39 @@ public class User implements DBContract {
         this.email = cursor.getString(cursor.getColumnIndex(UserEntry.KEY_EMAIL));
         this.password = cursor.getString(cursor.getColumnIndex(UserEntry.KEY_PASSWORD));
     }
+
+    private User(Parcel in) {
+        email = in.readString();
+        password = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(email);
+        dest.writeString(password);
+    }
+
+    public void readFromParcel(Parcel in) {
+        email = in.readString();
+        password = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getEmail() {
         return email;

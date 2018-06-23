@@ -47,7 +47,6 @@ public interface DBContract {
         String KEY_PHOTO_ID = "photo_id";
 
 
-
         String[] KEY_ARRAY = {
                 KEY_NAME,
                 KEY_INGREDIENTS,
@@ -67,14 +66,17 @@ public interface DBContract {
     }
 
     interface OrderEntry extends BaseColumns {
+        // Hay que entrecomillar el nombre de la tabla, ya que order es una palabra reservada
         String TABLE_NAME = "\"order\"";
         String KEY_ADDRESS = "address";
         String KEY_DATE = "date";
+        String KEY_PRICE = "price";
         String KEY_USER_ID = "user_id";
 
         String[] KEY_ARRAY = {
                 KEY_ADDRESS,
                 KEY_DATE,
+                KEY_PRICE,
                 KEY_USER_ID
         };
 
@@ -82,6 +84,7 @@ public interface DBContract {
                 + _ID + INTEGER_TYPE + PRIMARY_KEY + COMA_SEP
                 + KEY_ADDRESS + TEXT_TYPE + NOT_NULL + COMA_SEP
                 + KEY_DATE + TEXT_TYPE + NOT_NULL + COMA_SEP
+                + KEY_PRICE + REAL_TYPE + NOT_NULL + COMA_SEP
                 + KEY_USER_ID + INTEGER_TYPE + NOT_NULL + COMA_SEP
                 + FOREIGN_KEY + "(" + KEY_USER_ID + ")"
                 + REFERENCES + UserEntry.TABLE_NAME + "(" + UserEntry._ID + ")"

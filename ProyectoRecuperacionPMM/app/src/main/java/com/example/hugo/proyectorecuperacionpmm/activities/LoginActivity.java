@@ -19,6 +19,7 @@ import com.example.hugo.proyectorecuperacionpmm.R;
 import com.example.hugo.proyectorecuperacionpmm.data.DBContract;
 import com.example.hugo.proyectorecuperacionpmm.data.SQLiteHelper;
 import com.example.hugo.proyectorecuperacionpmm.data.UserDAO;
+import com.example.hugo.proyectorecuperacionpmm.model.User;
 
 public class LoginActivity extends AppCompatActivity {
     private static final int REQUEST_SIGNUP = 0;
@@ -50,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNUP);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }
@@ -58,14 +60,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-                onLoginSuccess(data.getStringExtra("email"));
+                // Si el registro se ha llevado a cabo con éxito, volvemos a la actividad principal
+                User user = data.getParcelableExtra("user");
+                onLoginSuccess(user);
             }
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
     }
 
     private void login() {
@@ -75,9 +74,12 @@ public class LoginActivity extends AppCompatActivity {
         }
         loginButton.setEnabled(false);
 
+        // Ocultamos el teclado del usuario en el caso de que él no lo haya hecho
         InputMethodManager manager = (InputMethodManager)getSystemService(
                 Context.INPUT_METHOD_SERVICE);
-        manager.hideSoftInputFromWindow(passwordText.getWindowToken(), 0);
+        if (manager != null) {
+            manager.hideSoftInputFromWindow(passwordText.getWindowToken(), 0);
+        }
 
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setIndeterminate(true);
@@ -115,7 +117,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    onLoginSuccess(email);
+                    User user = new User(cursor);
+                    onLoginSuccess(user);
                 }
                 cursor.close();
                 sqLiteHelper.close();
@@ -124,13 +127,12 @@ public class LoginActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    private void onLoginSuccess(String email) {
+    private void onLoginSuccess(User user) {
         loginButton.setEnabled(true);
-        // Volvemos a la actividad principal
-        Intent data = new Intent();
-        data.putExtra("email", email);
-        setResult(RESULT_OK, data);
-        finish();
+        // Volvemos a la actividad principal mandando el email del usuario
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
     }
 
 

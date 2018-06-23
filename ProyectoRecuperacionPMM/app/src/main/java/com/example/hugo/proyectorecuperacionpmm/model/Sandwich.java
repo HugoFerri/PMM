@@ -1,28 +1,62 @@
-package com.example.hugo.proyectorecuperacionpmm.models;
+package com.example.hugo.proyectorecuperacionpmm.model;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.example.hugo.proyectorecuperacionpmm.data.DBContract;
 
-public class Sandwich implements DBContract {
+public class Sandwich implements DBContract, Parcelable  {
     private String name;
     private String ingredients;
     private float price;
-    private int photo_id;
+    private int photoId;
 
-    public Sandwich(String name, String ingredients, float price, int photo_id) {
+    public Sandwich(String name, String ingredients, float price, int photoId) {
         this.name = name;
         this.ingredients = ingredients;
         this.price = price;
-        this.photo_id = photo_id;
+        this.photoId = photoId;
     }
 
     public Sandwich(Cursor cursor) {
         this.name = cursor.getString(cursor.getColumnIndex(SandwichEntry.KEY_NAME));
         this.ingredients = cursor.getString(cursor.getColumnIndex(SandwichEntry.KEY_INGREDIENTS));
         this.price = cursor.getFloat(cursor.getColumnIndex(SandwichEntry.KEY_PRICE));
-        this.photo_id = cursor.getInt(cursor.getColumnIndex(SandwichEntry.KEY_PHOTO_ID));
+        this.photoId = cursor.getInt(cursor.getColumnIndex(SandwichEntry.KEY_PHOTO_ID));
+    }
+
+    private Sandwich(Parcel in) {
+        name = in.readString();
+        ingredients = in.readString();
+        price = in.readFloat();
+        photoId = in.readInt();
+    }
+
+    public static final Creator<Sandwich> CREATOR = new Parcelable.Creator<Sandwich>() {
+        @Override
+        public Sandwich createFromParcel(Parcel in) {
+            return new Sandwich(in);
+        }
+
+        @Override
+        public Sandwich[] newArray(int size) {
+            return new Sandwich[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(ingredients);
+        dest.writeFloat(price);
+        dest.writeInt(photoId);
     }
 
     public String getName() {
@@ -49,12 +83,12 @@ public class Sandwich implements DBContract {
         this.price = price;
     }
 
-    public int getPhoto_id() {
-        return photo_id;
+    public int getPhotoId() {
+        return photoId;
     }
 
-    public void setPhoto_id(int photo_id) {
-        this.photo_id = photo_id;
+    public void setPhotoId(int photoId) {
+        this.photoId = photoId;
     }
 
     public ContentValues toContentValues() {
@@ -63,7 +97,7 @@ public class Sandwich implements DBContract {
         values.put(SandwichEntry.KEY_NAME, name);
         values.put(SandwichEntry.KEY_INGREDIENTS, ingredients);
         values.put(SandwichEntry.KEY_PRICE, price);
-        values.put(SandwichEntry.KEY_PHOTO_ID, photo_id);
+        values.put(SandwichEntry.KEY_PHOTO_ID, photoId);
 
         return values;
     }

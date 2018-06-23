@@ -2,7 +2,7 @@ package com.example.hugo.proyectorecuperacionpmm.data;
 
 import android.database.Cursor;
 
-import com.example.hugo.proyectorecuperacionpmm.models.Order;
+import com.example.hugo.proyectorecuperacionpmm.model.Order;
 
 public class OrderDAO implements DBContract.OrderEntry {
     private SQLiteHelper sqLiteHelper;

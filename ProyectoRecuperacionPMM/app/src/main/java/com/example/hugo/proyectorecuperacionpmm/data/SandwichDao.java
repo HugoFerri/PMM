@@ -2,10 +2,33 @@ package com.example.hugo.proyectorecuperacionpmm.data;
 
 import android.database.Cursor;
 
-import com.example.hugo.proyectorecuperacionpmm.models.Sandwich;
+import com.example.hugo.proyectorecuperacionpmm.R;
+import com.example.hugo.proyectorecuperacionpmm.model.Sandwich;
 
 public class SandwichDAO implements DBContract.SandwichEntry {
     private SQLiteHelper sqLiteHelper;
+
+    // Array con datos de prueba para poder probar la base de datos
+    private static final Sandwich[] MOCK_DATA = {
+            new Sandwich(
+                    "Sandwich Jamon York",
+                    "Lechuga, tomate, Jamon York, queso",
+                    5.0f,
+                    R.drawable.sandwich1
+            ),
+            new Sandwich(
+                    "Sandwich Vegano",
+                    "Lechuga, rucula, cosas veganas",
+                    6.0f,
+                    R.drawable.sandwich2
+            ),
+            new Sandwich(
+                    "Sandwich triple",
+                    "Pechuga, tomate, queso, lechuga",
+                    7.0f,
+                    R.drawable.sandwich3
+            ),
+    };
 
     public SandwichDAO(SQLiteHelper sqLiteHelper) {
         this.sqLiteHelper = sqLiteHelper;
@@ -52,5 +75,11 @@ public class SandwichDAO implements DBContract.SandwichEntry {
                 null,
                 sandwich.toContentValues()
         );
+    }
+
+    public void insertMockData() {
+        for (Sandwich sandwich : MOCK_DATA) {
+            insertSandwich(sandwich);
+        }
     }
 }

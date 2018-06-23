@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.hugo.proyectorecuperacionpmm.R;
 import com.example.hugo.proyectorecuperacionpmm.data.SQLiteHelper;
-import com.example.hugo.proyectorecuperacionpmm.models.User;
+import com.example.hugo.proyectorecuperacionpmm.model.User;
 import com.example.hugo.proyectorecuperacionpmm.data.UserDAO;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -88,8 +88,9 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    userDAO.insertUser(new User(email, password));
-                    onSignUpSuccess(email);
+                    User user = new User(email, password);
+                    userDAO.insertUser(user);
+                    onSignUpSuccess(user);
                 }
                 cursor.close();
                 sqLiteHelper.close();
@@ -98,10 +99,10 @@ public class SignUpActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    private void onSignUpSuccess(String email) {
+    private void onSignUpSuccess(User user) {
         signUpButton.setEnabled(true);
         Intent data = new Intent();
-        data.putExtra("email", email);
+        data.putExtra("user", user);
         setResult(RESULT_OK, data);
         finish();
     }

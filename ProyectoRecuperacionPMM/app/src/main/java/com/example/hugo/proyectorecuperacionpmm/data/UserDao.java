@@ -2,7 +2,7 @@ package com.example.hugo.proyectorecuperacionpmm.data;
 
 import android.database.Cursor;
 
-import com.example.hugo.proyectorecuperacionpmm.models.User;
+import com.example.hugo.proyectorecuperacionpmm.model.User;
 
 public class UserDAO implements DBContract.UserEntry {
     private SQLiteHelper sqLiteHelper;
@@ -34,6 +34,24 @@ public class UserDAO implements DBContract.UserEntry {
                 null,
                 null
         );
+    }
+
+    public int getUserIDByEmail(String email) {
+        int id = 0;
+        Cursor cursor = sqLiteHelper.getReadableDatabase().query(
+                TABLE_NAME,
+                new String[]{_ID},
+                KEY_EMAIL + "=" + email,
+                null,
+                null,
+                null,
+                null
+        );
+        if (cursor.moveToFirst()) {
+            id = cursor.getInt(cursor.getColumnIndex(_ID));
+        }
+        cursor.close();
+        return id;
     }
 
     public Cursor getAllUsers() {
