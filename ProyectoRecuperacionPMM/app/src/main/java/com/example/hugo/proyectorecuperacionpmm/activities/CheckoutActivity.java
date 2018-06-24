@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hugo.proyectorecuperacionpmm.R;
 import com.example.hugo.proyectorecuperacionpmm.data.OrderDAO;
@@ -58,6 +59,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 Order order = new Order(address, orderPrice, userID);
                 orderDAO.insertOrder(order);
                 sqLiteHelper.close();
+                Toast.makeText(getBaseContext(), "Comprado", Toast.LENGTH_LONG).show();
             }
         });
     }

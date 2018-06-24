@@ -102,6 +102,7 @@ public class Order implements DBContract, Parcelable  {
 
         values.put(OrderEntry.KEY_ADDRESS, address);
         values.put(OrderEntry.KEY_DATE, date);
+        values.put(OrderEntry.KEY_PRICE, price);
         values.put(OrderEntry.KEY_USER_ID, userId);
 
         return values;

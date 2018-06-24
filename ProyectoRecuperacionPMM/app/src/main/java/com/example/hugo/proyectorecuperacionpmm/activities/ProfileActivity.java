@@ -40,10 +40,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         int userID = userDAO.getUserIDByEmail(String.format("\"%s\"", userEmail));
         Cursor cursor = orderDAO.getOrderByUserID(userID);
-        if (cursor.moveToFirst()) {
-            while (cursor.moveToNext()) {
-                userOrders.add(new Order(cursor));
-            }
+        while (cursor.moveToNext()) {
+            userOrders.add(new Order(cursor));
         }
         sqLiteHelper.close();
         cursor.close();

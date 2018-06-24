@@ -38,7 +38,7 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
     }
 
     public int getItemCount() {
-        return 0;
+        return userOrders.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

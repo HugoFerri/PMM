@@ -8,11 +8,6 @@
         android:orderInCategory="100"
         app:showAsAction="never" />
 
-    <item android:id="@+id/Order"
-        android:title="Mis pedidos"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
-
     <item android:id="@+id/About"
         android:title="Acerca de"
         android:orderInCategory="100"
