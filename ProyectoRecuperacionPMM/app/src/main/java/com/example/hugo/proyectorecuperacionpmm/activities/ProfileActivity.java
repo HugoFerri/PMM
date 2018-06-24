@@ -28,8 +28,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         final User user = getIntent().getParcelableExtra("user");
 
-        TextView nameText = findViewById(R.id.fragment_profile_name);
-        RecyclerView recyclerView = findViewById(R.id.fragment_profile_recycler);
+        TextView nameText = findViewById(R.id.activity_profile_name);
+        RecyclerView recyclerView = findViewById(R.id.activity_profile_recycler);
 
         SQLiteHelper sqLiteHelper = SQLiteHelper.getInstance(getApplicationContext());
         UserDAO userDAO = new UserDAO(sqLiteHelper);
